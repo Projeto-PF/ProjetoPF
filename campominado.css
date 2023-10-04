@@ -1,0 +1,32 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+ body{
+    background-image: url(dangerZone.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+  h1 {
+      text-align: center;  
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 3em;
+      font-weight: bold;
+      padding-top: 1em;
+      padding-bottom:0.5em;
+  }
+  div {
+      text-align: center;
+  }
+  table {
+      margin: 1em auto;
+      border-collapse: collapse;
+  }
+  td {
+      border: 1px solid black;
+      width: 2em;
+      height: 2em;
+      text-align: center;
+  }
+  .blocked {
+      background: rgb(177, 171, 171);    
+  }
+ 
