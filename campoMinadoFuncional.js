@@ -1,12 +1,12 @@
+let linhas, colunas, bombas, matriz, tabela;
 //Função que gera matriz através do mapeamento da lista usando a bibiloteca Array e a função map,para gerar listas através de uma função que foi solicitada para os itens do array;
 //Na função gera matriz new Array(linhas).fill(0),irá gerar uma lista [0,0,0,0] => a quantidade de itens depende do parâmetros "linhas",logo depois,a partir do .map((itemDoArray) => itemDoArray = Array(colunas).fill(0)),cada item da lista gerada,recebe a função de criar uma nova lista com a quantidade de itens definida pelo parâmetro 'colunas',e todos os itens da lista serão preenchidos por 0 por causa do .fill(0);
-function geraMatriz(linhas,colunas){
-    const matriz = new Array(linhas).fill(0).map((itemDoArray) => itemDoArray = Array(colunas).fill(0));
-    return matriz;
+function geraMatriz(lin,col){
+    matriz = new Array(lin).fill(0).map((itemDoArray) => itemDoArray = Array(col).fill(0));
  }
-function gerarTabuleiro(linhas, colunas) { //A função gerarTabuleiro recebe dois parâmetros: linhas e colunas, que indicam o número de linhas e colunas que a tabela deve ter
+function gerarTabuleiro(lin, col) { //A função gerarTabuleiro recebe dois parâmetros: linhas e colunas, que indicam o número de linhas e colunas que a tabela deve ter
 
-    const matriz = geraMatriz(linhas, colunas)//a constante matriz recebe a função chamada geraMatriz para criar uma matriz com o número especificado de linhas e colunas 
+    geraMatriz(lin,col)//a constante matriz recebe a função chamada geraMatriz para criar uma matriz com o número especificado de linhas e colunas 
     
     const tabuleiro = document.querySelector('.tabuleiro');//A constante tabela recebe um elemento HTML no documento com o ID 'tabuleito' usando document.querySelector('tabuleiro')
     
