@@ -23,5 +23,21 @@ function gerarTabuleiro(linhas, colunas) { //A função gerarTabuleiro recebe do
     }
     
     gerarTabuleiro(9,9)
+ 
+    // A função gerarBombas retorna os locais contendos as bombas, atráves de outras 3 funções internas.Onde a função indice gera índices aleatórios (linha e coluna) ; a função localdabomba recebe uma matriz de entrada, gera índices aleatórios usando índices() e então define o valor na posição correspondente na grade como -1 , retornando a matriz atualizada. O código começa matrizbomba como um array preenchido com valores nulos com comprimento igual ao número de bombas.Depois,ele usa o Array.reduce() para iterar sobre esse array e chama repetidamente a função localdabomba() para colocar bombas em posições aleatórias na grade. O resultado é uma grade (matrizbomba) com bombas distribuídas aleatoriamente.
 
+
+function gerarBombas() {
+    const indices = () => [
+       Math.floor(Math.random() * linhas),
+       Math.floor(Math.random() * colunas),
+     ];
+     const localdabomba = (matriz) => {
+       const [linha, coluna] = indices();
+       matriz[linha][coluna] = -1;
+       return matriz;
+     };
+     const matrizbomba = Array(bombas).fill(null).reduce(localdabomba, matriz);
+   return matrizbomba;
+   }
  
