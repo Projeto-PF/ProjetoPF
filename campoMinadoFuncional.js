@@ -65,6 +65,44 @@ function bandeira(event) { //Esta função é usada para alternar entre os estad
       }
       return false;
   } //E,por fim, a função retorna `false` para evitar que o evento de clique seja propagado para outros elementos.
+
+function init() { //Esta função se classifica como a principal função que inicializa o jogo,ditando a dificuldade do mesmo
+
+tabuleiro = document.querySelector(".tabuleiro") //Essa função recebe a referência para o elemento HTML "tabuleiro",o qual será alterado de acordo com a dificuldade selecionada na tela inicial
+
+tabuleiro.onclick= verificar; //Define a função "verificar" para ser chamada quando o tabuleiro for clicado tabela.oncontextmenu = bandeira; //Define a função "bandeira" para ser chamada quando o botão direito do mouse for clicado no tabuleiro
+
+const diff = document.getElementById("dificuldade"); //Essa const recebe a referência do elemento HTML com ID "dificuldade"
+const selecionarDiff = parseInt(diff.value); //Essa const vai receber o valor selecionado no elemento HTML e convertê-lo em número inteiro(Ex.:1,2,3...,neste jogo,foram utilizados 0=nível fácil,1=nível intermediário e 2=nível difícil) por meio da função pré definida "parseInt"
+
+if (selecionarDiff==0) {//Com base na dificuldade selecionada,são criados tabuleiros de tamanhos de colunas e linhas diferentes e com mais ou menos bombas,neste caso,SE a dificuldade selecionada for fácil,será gerado um tabuleiro com 9 linhas,9 colunas e 10 bombas espalhadas por ele.
+linhas = 9;
+
+colunas = 9;
+
+bombas = 10;
+} else if (selecionarDiff==1) { //SE a dificuldade selecionada for intermediária,será gerado um tabuleiro com 16 linhas,16 colunas e 40 bombas espalhadas pelo campo.
+
+linhas = 16; 
+
+colunas = 16;
+
+bombas = 40;
+   
+} else { // Já,se,a dificuldade selecionada for difícil,será gerado um tabuleiro com 16 linhas,30 colunas e 99 bombas
+
+linhas = 16;
+
+colunas = 30;
+
+bombas = 99; 
+}
+
+gerarTabuleiro(linhas,colunas);
+gerarBombas();
+gerarnumero2();
+}
+
 //A Função limparCelulas serve para analisar os arrays que não são bombas,e dar características para os itens do array,de acordo com valor que o item em determinado índice tem,para isso é preciso dar dois parâmetros para a função que irá receber os parâmetros de linhas e colunas (respectivamente l,c) 
 function limparCelulas(l, c) {
   //A const limparCelula serve para analisar se os índices recebidos estão dentro dos limites de linhas e colunas,
