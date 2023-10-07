@@ -54,6 +54,17 @@ function gerarBombas() {
      })
    })
 }
+function bandeira(event) { //Esta função é usada para alternar entre os estados de uma célula no jogo e é chamada quando um evento de clique ocorre em uma célula.
+      const cell = event.target; // Essa const recebe a célula que foi clicada usando `event.target`(o comando ".target" acessa o alvo em um evento que aconteceu em um elemento HTML,como clique de um mouse)
+      if (cell.className === "blocked") {
+          cell.className = "flag"; //Se a célula estiver bloqueada, a função altera a classe da célula para "flag",ou seja,indica que a célula agora está sinalizada com uma bandeira.
+          cell.innerHTML = "&#128681;"; //Essa linha de código adiciona o código HTML da bandeira (um emoji de bandeira) à célula.
+      } else if (cell.className === "flag") {
+          cell.className = "blocked"; //Aqui trata-se de outra condicional em que se a célula não estiver bloqueada, a função verifica se a classe da célula é "flag". Se for, isso significa que a célula está sinalizada com uma bandeira.E,caso a célula estiver sinalizada com uma bandeira, a função altera a classe da célula de volta para "blocked".
+          cell.innerHTML = ""; //Nessa linha,a função remove o código HTML da bandeira da célula.
+      }
+      return false;
+  } //E,por fim, a função retorna `false` para evitar que o evento de clique seja propagado para outros elementos.
 //A Função limparCelulas serve para analisar os arrays que não são bombas,e dar características para os itens do array,de acordo com valor que o item em determinado índice tem,para isso é preciso dar dois parâmetros para a função que irá receber os parâmetros de linhas e colunas (respectivamente l,c) 
 function limparCelulas(l, c) {
   //A const limparCelula serve para analisar se os índices recebidos estão dentro dos limites de linhas e colunas,
