@@ -80,3 +80,27 @@ function limparCelulas(l, c) {
  return limparVizinhos(l, c).map(limparCelula => limparCelula);
 }
  
+
+// Essa função serve para mostrar aonde as bombas ficaram posicionadas.Essa função percorre cada célula da matriz ''matriz'' e, se encontrar uma célula com o valor -1 (indicando uma bomba), ela atualiza o conteúdo HTML dessa célula para mostrar um ícone de bomba e define a classe da célula como "blank".
+
+function mostrarBombas() {
+  matriz.map((linha, i) =>
+    linha.map((celula, j) => {
+      if (celula === -1) {
+        const local = tabela.rows[i].cells[j];
+        local.innerHTML = "&#128163;";
+        local.className = "blank"; }
+      })
+  );}
+
+// Está função tem como intuito de quando o jogador marcar todos os campos em que não exista bombas,receber uma mensagem de que venceu. Ela seleciona elementos que sejam "blocked" e "flag" no documento. Verifica se o número de elementos é igual a "bombas".Se o número de elementos corresponder ao número de bombas, chama a função "mostrarBombas' ,desativa os eventos e exibe um alerta com a mensagem "Você venceu!".
+
+function fimDeJogo() {
+  const final = document.querySelectorAll("./blocked, .flag");
+  if (final.length === bombas) {
+     mostrarBombas();
+      tabuleiro.onclick = undefined;
+     tabuleiro.oncontextmenu = undefined;
+      alert("Você venceu!");
+ }
+}
