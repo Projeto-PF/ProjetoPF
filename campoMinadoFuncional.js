@@ -224,3 +224,11 @@ function ganhou(){
       location.reload()
   })//Dá uma função para o click no botão,que é pra dar reload na página,e voltar ao padrão,sem modificações;
 };
+
+// Essa função irá dar início ao jogo quando a tela for carregada ou recarregada ou quando a dificuldade for alterada
+function carregarJogo = () => {
+  init(); //Chama a função `init` para inicializar o jogo
+  const diff = document.getElementById("dificuldade"); // Essa const recebe a dificuldade em que seleciona o elemento HTML com o ID "dificuldade" usando `document.getElementById("dificuldade")`
+  diff.onchange = init; //É atribuído á função `init` o evento `onchange` do elemento "dificuldade". Isso significa que sempre que o valor do elemento "dificuldade" for alterado (por exemplo, quando o usuário seleciona uma opção diferente em uma lista suspensa), a função `init` será chamada novamente para reiniciar o jogo com a nova dificuldade selecionada.
+};
+onload = carregarJogo; //A função `carregarJogo` é atribuída ao evento `onload` da janela. Isso significa que a função `carregarJogo` será chamada assim que a página terminar de carregar.
