@@ -1,6 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
  body{
+    text-align: center;  
+    font-family: 'Dela Gothic One', cursive;
     background-image: url(dangerZone.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,7 +28,37 @@
       height: 2em;
       text-align: center;
   }
-  .blocked {
+  .tenteNovamente{
+    color: white;
+    position: absolute;
+    font-family: 'Dela Gothic One', cursive;
+    border: 2px;
+    border-color: black;
+    border-radius: 20px;
+    width: 500px;
+    top: 250px;
+    left: 50px;
+    right: 10px;
+    font-size: 3em;
+    font-weight: bold;
+    background-color: #001340;
+  }
+  .ganhou{
+    color: white;
+    position: absolute;
+    font-family: 'Dela Gothic One', cursive;
+    border: 2px;
+    border-color: black;
+    border-radius: 20px;
+    width: 500px;
+    top: 250px;
+    left: 50px;
+    right: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #001340;
+  }
+  .blocked .flag {
       background: rgb(177, 171, 171);    
   }
  

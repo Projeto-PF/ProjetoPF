@@ -144,10 +144,34 @@ function verificar(event) {
 
 function fimDeJogo() {
   const final = document.querySelectorAll(".blocked, .flag");
-  if (final.length === bombas) {
-     mostrarBombas();
+  if (final.length === bombas || final.length === 0) {
+      mostrarBombas();
       tabuleiro.onclick = undefined;
-     tabuleiro.oncontextmenu = undefined;
-      alert("Você venceu!");
+      tabuleiro.oncontextmenu = undefined;
+      ganhou()
  }
 }
+//A função tenteNovamente cria um botão na tela,que ao ser clickado a janela irá recarregar,ela só é chamada caso o usuário perca o jogo,ou seja,clique em alguma bomba;
+function tenteNovamente(){
+  const botao = document.createElement("button");//Cria um botão no HTML;
+  const tenteNovamente = document.createTextNode("Tente Novamente!")//Cria um texto que irá ser usado no HTML;
+  botao.appendChild(tenteNovamente)//Insere o texto da const tenteNovamente,dentro do botão criado;
+  botao.classList.add('tenteNovamente')//Adiciona a classe "tenteNovamente"para o botão
+  const classeBotao = document.querySelector('.tenteNovamente')//Pega o botão pela classe,para que consiga manipular ele pelo DOM;
+  document.body.insertBefore(botao,classeBotao)//Coloca o botão e sua classe,dentro do body do HTML,para que assim apareça no documento acessado;
+  botao.addEventListener('click',evento =>{
+      location.reload()
+  })//Dá uma função para o click no botão,que é pra dar reload na página,e voltar ao padrão,sem modificações;
+}
+//função ganhou,faz quase a mesma função do tente novamente,mas muda a mensagem exibida no botão,e só é chamada quando o usuário ganha;
+function ganhou(){
+  const botao = document.createElement("button");//Cria um botão no HTML;
+  const tenteNovamente = document.createTextNode("Parabéns,Você Ganhou! Jogue Novamente!")//Cria um texto que irá ser usado no HTML;
+  botao.appendChild(tenteNovamente)//Insere o texto da const tenteNovamente,dentro do botão criado;
+  botao.classList.add('ganhou')//Adiciona a classe "tenteNovamente"para o botão;
+  const classeBotao = document.querySelector('.ganhou')//Pega o botão pela classe,para que consiga manipular ele pelo DOM;
+  document.body.insertBefore(botao,classeBotao)
+  botao.addEventListener('click',evento =>{
+      location.reload()
+  })//Dá uma função para o click no botão,que é pra dar reload na página,e voltar ao padrão,sem modificações;
+};
