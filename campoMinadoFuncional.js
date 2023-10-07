@@ -49,7 +49,7 @@ function gerarBombas() {
    matriz.map((linha, i) => {
      linha.map((cell, j) => {
        if (cell !== -1) {
-         gerarnumero(i, j)
+         gerarnumero1(i, j)
        }
      })
    })
@@ -110,10 +110,40 @@ function mostrarBombas() {
       })
   );}
 
+  //A função verificar vai servir para verificar o click do usuário,e dar uma função dependendo de onde for o click do jogador,ela recebe como parâmetro o evento que acontece na tela;
+function verificar(event) {
+  //A const cell recebe o target do evento,ou seja onde o click do usuário foi,em que alvo foi o click;
+  const cell = event.target;
+  //O if abaixo analisa se o alvo clickado tem a classe "flag",se tiver essa classe,não entra no if,e o click não irá afetar em nada; 
+  if (cell.className !== "flag") {
+      const linha = cell.parentNode.rowIndex;//Recebe o índice do elemento "pai"da célula clickada,ou seja,pega o índice da linha do array no click,pega o índice do <td>;
+      const coluna = cell.cellIndex;//Recebe o índice exato da célula clickada,no caso a coluna,que é a que está na parte de "dentro",o <tr>;
+      //Caso entre no if acima,o if abaixo irá analisar através do valor matriz[linha][coluna],se for igual a -1,é a bomba,ou seja,vai mostrar as outras bombas,dar um background vermelho para os quadrados das bombas,n receberá nada nos clicks,e irá chamar a função tenteNovamente()
+       if (matriz[linha][coluna]== -1) {
+              mostrarBombas();
+              cell.style.backgroundColor = "red";
+              tabela.onclick = undefined;
+              tabela.oncontextmenu = undefined;
+              tenteNovamente();
+              }
+          //Caso o valor de matriz[linha][coluna] seja 0,irá chamar a função limpar células,nos índices que foram dados pelo click,que vão servir como parâmetro para a função limparCelulas;
+          else if(matriz[linha][coluna] == 0){
+              limparCelulas(linha, coluna);
+              }
+          //O else abaixo analisa o  valor do item dado pelo array em determinados índices,caso o valor sena  diferente de 0 ou de -1 ele irá retornar para o html o número do item,e dará uma classe para o item de acordo com o número que ele irá retornar quando for clickado;
+          else{
+              cell.innerHTML = matriz[linha][coluna];
+              cell.className = "n" + matriz[linha][coluna];
+      }
+      //E Caso não tenham mais células que sejam diferente de -1,irá retornar a função fimDeJogo;
+      fimDeJogo();
+  }
+}
+
 // Está função tem como intuito de quando o jogador marcar todos os campos em que não exista bombas,receber uma mensagem de que venceu. Ela seleciona elementos que sejam "blocked" e "flag" no documento. Verifica se o número de elementos é igual a "bombas".Se o número de elementos corresponder ao número de bombas, chama a função "mostrarBombas' ,desativa os eventos e exibe um alerta com a mensagem "Você venceu!".
 
 function fimDeJogo() {
-  const final = document.querySelectorAll("./blocked, .flag");
+  const final = document.querySelectorAll(".blocked, .flag");
   if (final.length === bombas) {
      mostrarBombas();
       tabuleiro.onclick = undefined;
