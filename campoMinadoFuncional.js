@@ -1,4 +1,6 @@
-let linhas,colunas,bombas,matriz,tabela;
+let linhas,colunas,bombas,matriz,tabuleiro;
+tabuleiro = document.querySelector(".tabuleiro")
+
 //Função que gera matriz através do mapeamento da lista usando a bibiloteca Array e a função map,para gerar listas através de uma função que foi solicitada para os itens do array;
 //Na função gera matriz new Array(linhas).fill(0),irá gerar uma lista [0,0,0,0] => a quantidade de itens depende do parâmetros "linhas",logo depois,a partir do .map((itemDoArray) => itemDoArray = Array(colunas).fill(0)),cada item da lista gerada,recebe a função de criar uma nova lista com a quantidade de itens definida pelo parâmetro 'colunas',e todos os itens da lista serão preenchidos por 0 por causa do .fill(0);
 function geraMatriz(l,c){
@@ -39,8 +41,7 @@ function gerarBombas() {
 
  
  function gerarnumero1(l, c) {
-   const count = matriz
-     matriz.slice(l - 1, l + 2).map(linha => linha.slice(c - 1, c + 2)).flat().filter(cell => cell === -1).length
+   const count = matriz.slice(l - 1, l + 2).map(linha => linha.slice(c - 1, c + 2)).flat().filter(cell => cell === -1).length
    
    matriz[l][c] = count;
  }
@@ -70,7 +71,9 @@ function init() { //Esta função se classifica como a principal função que in
 
 tabuleiro = document.querySelector(".tabuleiro") //Essa função recebe a referência para o elemento HTML "tabuleiro",o qual será alterado de acordo com a dificuldade selecionada na tela inicial
 
-tabuleiro.onclick= verificar; //Define a função "verificar" para ser chamada quando o tabuleiro for clicado tabela.oncontextmenu = bandeira; //Define a função "bandeira" para ser chamada quando o botão direito do mouse for clicado no tabuleiro
+tabuleiro.onclick = verificar; //Define a função "verificar" para ser chamada quando o tabuleiro for clicado tabela.oncontextmenu = bandeira; //Define a função "bandeira" para ser chamada quando o botão direito do mouse for clicado no tabuleiro
+
+tabuleiro.oncontextmenu = bandeira;//Chama a função bandeira pelo click direito do
 
 const diff = document.getElementById("dificuldade"); //Essa const recebe a referência do elemento HTML com ID "dificuldade"
 const selecionarDiff = parseInt(diff.value); //Essa const vai receber o valor selecionado no elemento HTML e convertê-lo em número inteiro(Ex.:1,2,3...,neste jogo,foram utilizados 0=nível fácil,1=nível intermediário e 2=nível difícil) por meio da função pré definida "parseInt"
@@ -108,7 +111,7 @@ function limparCelulas(l, c) {
   //A const limparCelula serve para analisar se os índices recebidos estão dentro dos limites de linhas e colunas,
  const limparCelula = (indiceLin,indiceCol) => {
     if (indiceLin >= 0 && indiceLin < linhas && indiceCol >= 0 && indiceCol < colunas) {
-      const cell = tabela.rows[indiceLin].cells[indiceCol];
+      const cell = tabuleiro.rows[indiceLin].cells[indiceCol];
       //Este if abaixo irá analisar se o item do array que está sendo analisado possui a classe "blank"para aí entrar nos próximos ifs.
 
       if (cell.className !== "blank") {
@@ -153,7 +156,7 @@ function mostrarBombas() {
   matriz.map((linha, i) =>
     linha.map((celula, j) => {
       if (celula === -1) {
-        const local = tabela.rows[i].cells[j];
+        const local = tabuleiro.rows[i].cells[j];
         local.innerHTML = "&#128163;";
         local.className = "blank"; }
       })
@@ -171,8 +174,8 @@ function verificar(event) {
        if (matriz[linha][coluna]== -1) {
               mostrarBombas();
               cell.style.backgroundColor = "red";
-              tabela.onclick = undefined;
-              tabela.oncontextmenu = undefined;
+              tabuleiro.onclick = undefined;
+              tabuleiro.oncontextmenu = undefined;
               tenteNovamente();
               }
           //Caso o valor de matriz[linha][coluna] seja 0,irá chamar a função limpar células,nos índices que foram dados pelo click,que vão servir como parâmetro para a função limparCelulas;
@@ -226,7 +229,7 @@ function ganhou(){
 };
 
 // Essa função irá dar início ao jogo quando a tela for carregada ou recarregada ou quando a dificuldade for alterada
-function carregarJogo = () => {
+function carregarJogo () {
   init(); //Chama a função `init` para inicializar o jogo
   const diff = document.getElementById("dificuldade"); // Essa const recebe a dificuldade em que seleciona o elemento HTML com o ID "dificuldade" usando `document.getElementById("dificuldade")`
   diff.onchange = init; //É atribuído á função `init` o evento `onchange` do elemento "dificuldade". Isso significa que sempre que o valor do elemento "dificuldade" for alterado (por exemplo, quando o usuário seleciona uma opção diferente em uma lista suspensa), a função `init` será chamada novamente para reiniciar o jogo com a nova dificuldade selecionada.
