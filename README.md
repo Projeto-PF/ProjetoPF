@@ -7,6 +7,6 @@ Normalmente, o campo minado era jogado até o momento em que alguma bomba era en
 
 Cruzamos essas regras com o intuito de testar a memória do jogador, ao iniciar o jogo, e a atenção em não clicar nos locais onde as bobas foram reveladas.
 
-A explicação em vídeo do jogo encontra-se no seguinte link:
+A explicação em vídeo do jogo encontra-se no seguinte link: https://www.youtube.com/watch?v=R8UB5wptUZ4
 
 E o jogo está disponível no seguinte link: https://glistening-fudge-0da5e5.netlify.app/
