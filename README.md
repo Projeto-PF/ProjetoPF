@@ -10,3 +10,5 @@ Cruzamos essas regras com o intuito de testar a memória do jogador, ao iniciar 
 A explicação em vídeo do jogo encontra-se no seguinte link: https://www.youtube.com/watch?v=R8UB5wptUZ4
 
 E o jogo está disponível no seguinte link: https://glistening-fudge-0da5e5.netlify.app/
+
+Utilizamos um código que serviu para balizar o nosso código dentro da programação funcional: https://codepen.io/larii_d/pen/eEbJyZ?editors=0012
