@@ -1,6 +1,4 @@
-let linhas,colunas,bombas,matriz,tabuleiro;
-tabuleiro = document.querySelector(".tabuleiro")
-
+let matriz;
 //Função que gera matriz através do mapeamento da lista usando a bibiloteca Array e a função map,para gerar listas através de uma função que foi solicitada para os itens do array;
 //Na função gera matriz new Array(linhas).fill(0),irá gerar uma lista [0,0,0,0] => a quantidade de itens depende do parâmetros "linhas",logo depois,a partir do .map((itemDoArray) => itemDoArray = Array(colunas).fill(0)),cada item da lista gerada,recebe a função de criar uma nova lista com a quantidade de itens definida pelo parâmetro 'colunas',e todos os itens da lista serão preenchidos por 0 por causa do .fill(0);
 function geraMatriz(l,c){
@@ -25,10 +23,10 @@ function gerarTabuleiro(l, c) { //A função gerarTabuleiro recebe dois parâmet
     }
 
 // A função gerarBombas retorna os locais contendos as bombas, atráves de outras 3 funções internas.Onde a função indice gera índices aleatórios (linha e coluna) ; a função localdabomba recebe uma matriz de entrada, gera índices aleatórios usando índices() e então define o valor na posição correspondente na grade como -1 , retornando a matriz atualizada. O código começa matrizbomba como um array preenchido com valores nulos com comprimento igual ao número de bombas.Depois,ele usa o Array.reduce() para iterar sobre esse array e chama repetidamente a função localdabomba() para colocar bombas em posições aleatórias na grade. O resultado é uma grade (matrizbomba) com bombas distribuídas aleatoriamente.
-function gerarBombas() {
+function gerarBombas(l,c,bombas) {
   const indices = () => [
-     Math.floor(Math.random() * linhas),
-     Math.floor(Math.random() * colunas),
+     Math.floor(Math.random() * l),
+     Math.floor(Math.random() * c),
    ];
    const localdabomba = (matriz) => {
      const [linha, coluna] = indices();
@@ -79,37 +77,45 @@ const diff = document.getElementById("dificuldade"); //Essa const recebe a refer
 const selecionarDiff = parseInt(diff.value); //Essa const vai receber o valor selecionado no elemento HTML e convertê-lo em número inteiro(Ex.:1,2,3...,neste jogo,foram utilizados 0=nível fácil,1=nível intermediário e 2=nível difícil) por meio da função pré definida "parseInt"
 
 if (selecionarDiff==0) {//Com base na dificuldade selecionada,são criados tabuleiros de tamanhos de colunas e linhas diferentes e com mais ou menos bombas,neste caso,SE a dificuldade selecionada for fácil,será gerado um tabuleiro com 9 linhas,9 colunas e 10 bombas espalhadas por ele.
-linhas = 9;
+const linhas = 9;
 
-colunas = 9;
+const colunas = 9;
 
-bombas = 10;
+const bombas = 10;
+gerarTabuleiro(linhas, colunas);
+gerarBombas(linhas, colunas,bombas);
+gerarnumero2(linhas,colunas);
 } else if (selecionarDiff==1) { //SE a dificuldade selecionada for intermediária,será gerado um tabuleiro com 16 linhas,16 colunas e 40 bombas espalhadas pelo campo.
 
-linhas = 16; 
+const linhas = 16; 
 
-colunas = 16;
+const colunas = 16;
 
-bombas = 40;
+const bombas = 40;
+gerarTabuleiro(linhas, colunas);
+gerarBombas(linhas, colunas,bombas);
+gerarnumero2(linhas,colunas);
    
 } else { // Já,se,a dificuldade selecionada for difícil,será gerado um tabuleiro com 16 linhas,30 colunas e 99 bombas
 
-linhas = 16;
+const linhas = 16;
 
-colunas = 30;
+const colunas = 30;
 
-bombas = 99; 
+const bombas = 99; 
+gerarTabuleiro(linhas, colunas);
+gerarBombas(linhas, colunas,bombas);
+gerarnumero2(linhas,colunas);
 }
 
-gerarTabuleiro(linhas,colunas);
-gerarBombas();
-gerarnumero2();
 }
 
 //A Função limparCelulas serve para analisar os arrays que não são bombas,e dar características para os itens do array,de acordo com valor que o item em determinado índice tem,para isso é preciso dar dois parâmetros para a função que irá receber os parâmetros de linhas e colunas (respectivamente l,c) 
 function limparCelulas(l, c) {
   //A const limparCelula serve para analisar se os índices recebidos estão dentro dos limites de linhas e colunas,
  const limparCelula = (indiceLin,indiceCol) => {
+  const linhas = matriz.length;
+  const colunas = matriz[0].length;
     if (indiceLin >= 0 && indiceLin < linhas && indiceCol >= 0 && indiceCol < colunas) {
       const cell = tabuleiro.rows[indiceLin].cells[indiceCol];
       //Este if abaixo irá analisar se o item do array que está sendo analisado possui a classe "blank"para aí entrar nos próximos ifs.
@@ -196,6 +202,12 @@ function verificar(event) {
 
 function fimDeJogo() {
   const final = document.querySelectorAll(".blocked, .flag");
+  const verificaBombas = () =>{
+    const colunas = matriz[0].length;
+    if(colunas == 30){return bombas = 99}
+    else if (colunas == 16){return bombas = 40}
+    else{return bombas = 10}}
+    verificaBombas()
   if (final.length === bombas || final.length === 0) {
       mostrarBombas();
       tabuleiro.onclick = undefined;
