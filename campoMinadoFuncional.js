@@ -85,6 +85,8 @@ const bombas = 10;
 gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
+mostrarBombas()
+setTimeout(mostrarBombasTemporariamente,2000)
 } else if (selecionarDiff==1) { //SE a dificuldade selecionada for intermediária,será gerado um tabuleiro com 16 linhas,16 colunas e 40 bombas espalhadas pelo campo.
 
 const linhas = 16; 
@@ -95,7 +97,8 @@ const bombas = 40;
 gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
-   
+mostrarBombas()
+setTimeout(mostrarBombasTemporariamente,2000)  
 } else { // Já,se,a dificuldade selecionada for difícil,será gerado um tabuleiro com 16 linhas,30 colunas e 99 bombas
 
 const linhas = 16;
@@ -106,9 +109,11 @@ const bombas = 99;
 gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
+mostrarBombas()
+setTimeout(mostrarBombasTemporariamente,2000)
+}
 }
 
-}
 
 //A Função limparCelulas serve para analisar os arrays que não são bombas,e dar características para os itens do array,de acordo com valor que o item em determinado índice tem,para isso é preciso dar dois parâmetros para a função que irá receber os parâmetros de linhas e colunas (respectivamente l,c) 
 function limparCelulas(l, c) {
@@ -247,3 +252,17 @@ function carregarJogo () {
   diff.onchange = init; //É atribuído á função `init` o evento `onchange` do elemento "dificuldade". Isso significa que sempre que o valor do elemento "dificuldade" for alterado (por exemplo, quando o usuário seleciona uma opção diferente em uma lista suspensa), a função `init` será chamada novamente para reiniciar o jogo com a nova dificuldade selecionada.
 };
 onload = carregarJogo; //A função `carregarJogo` é atribuída ao evento `onload` da janela. Isso significa que a função `carregarJogo` será chamada assim que a página terminar de carregar.
+
+// Essa função serve para mostrar aonde as bombas estão localizadas antes de começar a partida. Pecorre a matriz,e, se encontrar uma célula com o valor -1 (indicando uma bomba), mostra aonde está as bombas definindo a classe da célula como "blocked".
+
+function mostrarBombasTemporariamente() {
+  
+  matriz.map((linha, i) =>
+    linha.map((celula, j) => {
+      if (celula === -1) {
+        const local = tabuleiro.rows[i].cells[j];
+        local.innerHTML = "";
+        local.className = "blocked"; }
+   })
+);
+}
