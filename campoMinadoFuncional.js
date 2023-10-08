@@ -86,7 +86,7 @@ gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
 mostrarBombas()
-setTimeout(mostrarBombasTemporariamente,2000)
+setTimeout(mostrarBombasTemporariamente,1000)
 } else if (selecionarDiff==1) { //SE a dificuldade selecionada for intermediária,será gerado um tabuleiro com 16 linhas,16 colunas e 40 bombas espalhadas pelo campo.
 
 const linhas = 16; 
@@ -98,7 +98,7 @@ gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
 mostrarBombas()
-setTimeout(mostrarBombasTemporariamente,2000)  
+setTimeout(mostrarBombasTemporariamente,1000)  
 } else { // Já,se,a dificuldade selecionada for difícil,será gerado um tabuleiro com 16 linhas,30 colunas e 99 bombas
 
 const linhas = 16;
@@ -110,7 +110,7 @@ gerarTabuleiro(linhas, colunas);
 gerarBombas(linhas, colunas,bombas);
 gerarnumero2(linhas,colunas);
 mostrarBombas()
-setTimeout(mostrarBombasTemporariamente,2000)
+setTimeout(mostrarBombasTemporariamente,1000)
 }
 }
 
