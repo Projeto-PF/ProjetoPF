@@ -39,7 +39,11 @@ function gerarBombas(l,c,bombas) {
 
  
  function gerarnumero1(l, c) { //Os parâmetros l e c representam, respectivamente, linhas e colunas da matriz que está sendo manipulada
-   const count = matriz.slice(l - 1, l + 2).map(linha => linha.slice(c - 1, c + 2)).flat().filter(cell => cell === -1).length //A execução funciona da seguinte maneira: seleção de linhas, cruzamento dessas linhas selecionadas com as colunas. flat() vai transformar a matriz bidimensional em unidimensional
+   const count = matriz.slice(l - 1, l + 2)
+   .map(linha => linha.slice(c - 1, c + 2))
+   .flat()
+   .filter(cell => cell === -1)
+   .length //A execução funciona da seguinte maneira: seleção de linhas, cruzamento dessas linhas selecionadas com as colunas. flat() vai transformar a matriz bidimensional em unidimensional
    
    matriz[l][c] = count; //Posterior ao passo acima, length vai atribuir o valor a count, e count será atribuido na posição de linhas(l) e colunas(c) na matriz
  }
